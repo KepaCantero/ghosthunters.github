@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 public class Mapa extends Fragment {
 
-	private GoogleMap mMap;    
+	private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
     private Marker marker;
     private Location myLocation;
