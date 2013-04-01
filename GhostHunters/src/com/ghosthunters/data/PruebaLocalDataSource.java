@@ -3,14 +3,10 @@ package com.ghosthunters.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 
 import com.ghosthunters.ui.IconMarker;
 import com.ghosthunters.ui.Marker;

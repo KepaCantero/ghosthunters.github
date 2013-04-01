@@ -96,7 +96,7 @@ public class Mapa extends Fragment {
 				getActivity().getSystemService(Context.LOCATION_SERVICE); 
 		Criteria criteria = new Criteria(); 
 		String provider = service.getBestProvider(criteria, false); 
-		myLocation = service.getLastKnownLocation(provider); 
+		myLocation = service.getLastKnownLocation(provider);
 		myLatLng = new LatLng(myLocation.getLatitude(),myLocation.getLongitude());
 		
 		//animateMarker(marker, new LatLng(43.21900, -2.01962), false);
