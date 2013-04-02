@@ -19,8 +19,8 @@ import android.graphics.Color;
 import android.location.Location;
 
 /**
- * This class will represent a physical location and will calculate it's
- * visibility and draw it's text and visual representation accordingly. This
+ * This class will represent a physical location and will calculate its
+ * visibility and draw its text and visual representation accordingly. This
  * should be extended if you want to change the way a Marker is viewed.
  * 
  * @author Justin Wetherell <phishman3579@gmail.com>
@@ -36,7 +36,7 @@ public class Marker implements Comparable<Marker> {
     private final Vector tmpLocationVector = new Vector();
     private final Vector locationXyzRelativeToCameraView = new Vector();
     private final float[] distanceArray = new float[1];
-    private final float[] locationArray = new float[3];
+    public final float[] locationArray = new float[3];
 
     private float initialY = 0.0f;
 

@@ -38,8 +38,8 @@ public class PruebaLocalDataSource extends DataSource {
 
     public List<Marker> getMarkers() {
     	
-        Marker ghost1 = new IconMarker("GHOST 1", 43.2193, -2.016932, 0, Color.RED, icon);
-        cachedMarkers.add(ghost1);
+        /*Marker ghost1 = new IconMarker("GHOST 1", 43.2193, -2.016932, 0, Color.RED, icon);
+        cachedMarkers.add(ghost1);*/
 
         /*
          * Marker lon = new IconMarker(
@@ -52,11 +52,17 @@ public class PruebaLocalDataSource extends DataSource {
          */
 
         /*
-         * float max = 10; for (float i=0; i<max; i++) { Marker marker = null;
-         * float decimal = i/max; if (i%2==0) marker = new Marker("Test-"+i,
-         * 39.99, -75.33+decimal, 0, Color.LTGRAY); marker = new
-         * IconMarker("Test-"+i, 39.99+decimal, -75.33, 0, Color.LTGRAY, icon);
-         * cachedMarkers.add(marker); }
+         * float max = 10;
+         * for (float i=0; i<max; i++) { 
+         *     Marker marker = null;
+         *     float decimal = i/max; 
+         *     if (i%2==0) 
+         *         marker = new Marker("Test-"+i,
+         *                 39.99, -75.33+decimal, 0, Color.LTGRAY); 
+         *     marker = new IconMarker("Test-"+i, 39.99+decimal, -75.33, 
+         *             0, Color.LTGRAY, icon);
+         *     cachedMarkers.add(marker);
+         * }
          */
 
         return cachedMarkers;

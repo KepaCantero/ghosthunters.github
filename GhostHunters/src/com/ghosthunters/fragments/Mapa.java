@@ -1,7 +1,14 @@
 package com.ghosthunters.fragments;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import com.ghosthunters.R;
+import com.ghosthunters.common.Vector;
+import com.ghosthunters.data.PruebaLocalDataSource;
+import com.ghosthunters.ui.IconMarker;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,6 +42,8 @@ public class Mapa extends Fragment {
     private Marker marker;
     private Location myLocation;
     private LatLng myLatLng;
+    private List<com.ghosthunters.ui.Marker> marcadoresCargados = 
+    		new ArrayList<com.ghosthunters.ui.Marker>();;
 	
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,11 +95,6 @@ public class Mapa extends Fragment {
 			
 		}
 		
-		marker = mMap.addMarker(new MarkerOptions()
-        	.position(new LatLng(43.221471, -2.018223))
-        	.title("I'm a fucking ghost!")
-        	.icon(BitmapDescriptorFactory.fromResource(R.drawable.fantasma_icon)));
-		
 		//Esto sirve para localizar la posición del usuario aunque no tenga GPS
 		LocationManager service = (LocationManager) 
 				getActivity().getSystemService(Context.LOCATION_SERVICE); 
@@ -99,8 +103,36 @@ public class Mapa extends Fragment {
 		myLocation = service.getLastKnownLocation(provider);
 		myLatLng = new LatLng(myLocation.getLatitude(),myLocation.getLongitude());
 		
-		//animateMarker(marker, new LatLng(43.21900, -2.01962), false);
-		animateMarker(marker, myLatLng, false);
+		
+		PruebaLocalDataSource localData = new PruebaLocalDataSource
+        		(this.getResources());
+        marcadoresCargados = localData.getMarkers();
+        
+        Iterator<com.ghosthunters.ui.Marker> iterador = 
+        		marcadoresCargados.iterator();
+        while( iterador.hasNext() ) { 
+        	com.ghosthunters.ui.Marker marcador = 
+        			(com.ghosthunters.ui.Marker) iterador.next();
+        	float lat = marcador.getScreenPosition().getX();
+        	float lng = marcador.getScreenPosition().getY();
+        	
+        	Toast.makeText(getActivity(), 
+	        		  "" + lat + lng, 
+	        		  Toast.LENGTH_LONG).show();
+        	
+        	marker = mMap.addMarker(new MarkerOptions()
+        	.position(new LatLng(lat, lng))
+        	.icon(BitmapDescriptorFactory.fromResource(R.drawable.fantasma_icon)));
+        }
+		
+		/*marker = mMap.addMarker(new MarkerOptions()
+        	.position(new LatLng(43.221471, -2.018223))
+        	.title("I'm a fucking ghost!")
+        	.icon(BitmapDescriptorFactory.fromResource(R.drawable.fantasma_icon)));*/
+		
+		
+		
+		//animateMarker(marker, myLatLng, false);
 		
     }
 	
