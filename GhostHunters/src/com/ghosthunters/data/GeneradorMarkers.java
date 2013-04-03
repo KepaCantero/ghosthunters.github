@@ -12,9 +12,12 @@ public class GeneradorMarkers {
 	
 	public List<MarcadorBase> getMarcadores() {
 		
-		MarcadorBase ghost1 = new MarcadorBase("GHOST 1", 43.2193, -2.016932, 0);
+		MarcadorBase ghost1 = new MarcadorBase("FUCKER 1", 43.2193, -2.016932, 0);
         marcadoresBase.add(ghost1);
 		
+        MarcadorBase ghost2 = new MarcadorBase("FUCKER 2", 43.2027, -2.0281, 0);
+        marcadoresBase.add(ghost2);
+        
 		return marcadoresBase;
 	}
 }

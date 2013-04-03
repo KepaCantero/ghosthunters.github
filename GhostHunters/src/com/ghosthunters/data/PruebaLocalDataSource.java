@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 import com.ghosthunters.ui.IconMarker;
+import com.ghosthunters.ui.MarcadorBase;
 import com.ghosthunters.ui.Marker;
 import com.ghosthunters.R;
 
@@ -38,6 +39,21 @@ public class PruebaLocalDataSource extends DataSource {
 
     public List<Marker> getMarkers() {
     	
+    	GeneradorMarkers generador = new GeneradorMarkers();
+    	List<MarcadorBase> marcadoresBase = generador.getMarcadores();
+    	for (MarcadorBase marcadorBase : marcadoresBase){
+    		String nombre = marcadorBase.getNombre();
+    		double lat = marcadorBase.getLat();
+    		double lng = marcadorBase.getLng();
+    		double alt = marcadorBase.getAlt();
+    	
+	    	Marker ghost1 = new IconMarker(nombre, lat, lng, alt, Color.RED, icon);
+	        cachedMarkers.add(ghost1);
+    	}
+    	
+    	return cachedMarkers;
+    }
+}
         /*Marker ghost1 = new IconMarker("GHOST 1", 43.2193, -2.016932, 0, Color.RED, icon);
         cachedMarkers.add(ghost1);*/
 
@@ -64,7 +80,3 @@ public class PruebaLocalDataSource extends DataSource {
          *     cachedMarkers.add(marker);
          * }
          */
-
-        return cachedMarkers;
-    }
-}
