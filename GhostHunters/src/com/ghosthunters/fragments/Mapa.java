@@ -1,15 +1,10 @@
 package com.ghosthunters.fragments;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.ghosthunters.R;
-import com.ghosthunters.common.Vector;
 import com.ghosthunters.data.GeneradorMarkers;
-import com.ghosthunters.data.PruebaLocalDataSource;
-import com.ghosthunters.ui.IconMarker;
 import com.ghosthunters.ui.MarcadorBase;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -44,8 +39,8 @@ public class Mapa extends Fragment {
     private Marker marker;
     private Location myLocation;
     private LatLng myLatLng;
-    private List<com.ghosthunters.ui.Marker> marcadoresCargados = 
-    		new ArrayList<com.ghosthunters.ui.Marker>();;
+    GeneradorMarkers generador = new GeneradorMarkers();;
+    List<MarcadorBase> marcadoresBase = null;
 	
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,38 +100,34 @@ public class Mapa extends Fragment {
 		myLocation = service.getLastKnownLocation(provider);
 		myLatLng = new LatLng(myLocation.getLatitude(),myLocation.getLongitude());
 		
-		GeneradorMarkers generador = new GeneradorMarkers();
-    	List<MarcadorBase> marcadoresBase = generador.getMarcadores();
-    	for (MarcadorBase marcadorBase : marcadoresBase){
-    		String nombre = marcadorBase.getNombre();
-    		double lat = marcadorBase.getLat();
-    		double lng = marcadorBase.getLng();
+    	obtenerMarcadores();
+		
+    	//El siguiente handler y el runnable sirven para hacer una pausa de 10.000
+    	//milisegundos tras la que vuelve a llamarse a obtenerMarcadores().
+    	Handler handler = new Handler(); 
+    	handler.postDelayed(new Runnable() { 
+    		public void run() { 
+    			obtenerMarcadores(); 
+    		} 
+    	}, 10000);
+
+    }
+	
+	public void obtenerMarcadores(){
+		
+		marcadoresBase = generador.getMarcadores();
+		for (MarcadorBase marcadorBase : marcadoresBase){
+			String nombre = marcadorBase.getNombre();
+			double lat = marcadorBase.getLat();
+			double lng = marcadorBase.getLng();
 		
 			marker = mMap.addMarker(new MarkerOptions()
 		    	.position(new LatLng(lat, lng))
 		    	.icon(BitmapDescriptorFactory.fromResource(R.drawable.fantasma_icon)));
-    	}
-    }
-		
-		/*PruebaLocalDataSource localData = new PruebaLocalDataSource
-        		(this.getResources());
-        marcadoresCargados = localData.getMarkers();
-        
-        Iterator<com.ghosthunters.ui.Marker> iterador = 
-        		marcadoresCargados.iterator();
-        while( iterador.hasNext() ) { 
-        	com.ghosthunters.ui.Marker marcador = 
-        			(com.ghosthunters.ui.Marker) iterador.next();
-        	float lat = marcador.getScreenPosition().getX();
-        	float lng = marcador.getScreenPosition().getY();*/
-        	        	
-		
-		/*marker = mMap.addMarker(new MarkerOptions()
-        	.position(new LatLng(43.221471, -2.018223))
-        	.title("I'm a fucking ghost!")
-        	.icon(BitmapDescriptorFactory.fromResource(R.drawable.fantasma_icon)));*/
-				
-		//animateMarker(marker, myLatLng, false);
+			
+			animateMarker(marker, myLatLng, false);
+		}
+	}
 	
 	public void animateMarker(final Marker marker, final LatLng toPosition, 
 			final boolean hideMarker) {

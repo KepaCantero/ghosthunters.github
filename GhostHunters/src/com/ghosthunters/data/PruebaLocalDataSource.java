@@ -54,6 +54,7 @@ public class PruebaLocalDataSource extends DataSource {
     	return cachedMarkers;
     }
 }
+    	
         /*Marker ghost1 = new IconMarker("GHOST 1", 43.2193, -2.016932, 0, Color.RED, icon);
         cachedMarkers.add(ghost1);*/
 
