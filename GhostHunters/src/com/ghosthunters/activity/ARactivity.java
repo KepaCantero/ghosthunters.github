@@ -91,7 +91,7 @@ public class ARactivity extends AugmentedReality {
 
         // Local
         PruebaLocalDataSource localData = new PruebaLocalDataSource
-        		(this.getResources());
+        		(this.getResources(), this);
         ARData.addMarkers(localData.getMarkers());
     }
 

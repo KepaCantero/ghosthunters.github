@@ -3,6 +3,7 @@ package com.ghosthunters.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Application;
 import android.os.Handler;
 import android.util.Log;
 
@@ -14,7 +15,6 @@ public class GeneradorMarkers {
 	private List<MarcadorBase> marcadoresBase = new ArrayList<MarcadorBase>();
 	final Handler handle = new Handler();
 	Thread t = new Thread();
-	private static boolean iniciada = true;
 	
 	
 	public List<MarcadorBase> getMarcadores() {
@@ -71,10 +71,6 @@ public class GeneradorMarkers {
 	        marcadoresBase.add(ghost4);
 	        Log.v("RUNNABLE", "FANTASMAS 3 Y 4 CREADOS" );
 		}
-	}
-
-	public static boolean isIniciada() {
-		return iniciada;
 	}
 	
 }

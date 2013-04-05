@@ -32,9 +32,11 @@
         android:required="true"/>
     
     <application
-        android:icon="@drawable/icon" 
-		android:label="@string/app_name"
-		android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        android:name="com.ghosthunters.application.DataApplication"
+	        android:allowBackup="true"
+	        android:icon="@drawable/icon" 
+			android:label="@string/app_name"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 		
         <uses-library android:name="com.google.android.maps" />
 	  
@@ -61,12 +63,6 @@
             android:name="com.ghosthunters.activity.ARactivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:screenOrientation="landscape" />
-         
-         <activity
-            android:name="com.ghosthunters.activity.MapaUnico"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:screenOrientation="landscape" />
-        
                 
     </application>
 

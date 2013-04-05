@@ -3,11 +3,14 @@ package com.ghosthunters.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
+import com.ghosthunters.activity.ARactivity;
+import com.ghosthunters.application.DataApplication;
 import com.ghosthunters.ui.IconMarker;
 import com.ghosthunters.ui.MarcadorBase;
 import com.ghosthunters.ui.Marker;
@@ -24,11 +27,13 @@ public class PruebaLocalDataSource extends DataSource {
 
     private List<Marker> cachedMarkers = new ArrayList<Marker>();
     private static Bitmap icon = null;
+    Activity activity = null;
 
-    public PruebaLocalDataSource(Resources res) {
+    public PruebaLocalDataSource(Resources res, Activity act) {
 
     	if (res == null) throw new NullPointerException();
         createIcon(res);
+        activity = act;
     }
 
     protected void createIcon(Resources res) {
@@ -39,8 +44,9 @@ public class PruebaLocalDataSource extends DataSource {
 
     public List<Marker> getMarkers() {
     	
-    	GeneradorMarkers generador = new GeneradorMarkers();
-    	List<MarcadorBase> marcadoresBase = generador.getMarcadores();
+    	DataApplication appState = ((DataApplication)activity.getApplication());
+    	List<MarcadorBase> marcadoresBase = appState.data.getMarcadores();
+    	
     	for (MarcadorBase marcadorBase : marcadoresBase){
     		String nombre = marcadorBase.getNombre();
     		double lat = marcadorBase.getLat();

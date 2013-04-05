@@ -4,6 +4,7 @@ package com.ghosthunters.fragments;
 import java.util.List;
 
 import com.ghosthunters.R;
+import com.ghosthunters.application.DataApplication;
 import com.ghosthunters.data.GeneradorMarkers;
 import com.ghosthunters.ui.MarcadorBase;
 import com.google.android.gms.maps.CameraUpdate;
@@ -39,7 +40,7 @@ public class Mapa extends Fragment {
     private Marker marker;
     private Location myLocation;
     private LatLng myLatLng;
-    GeneradorMarkers generador = new GeneradorMarkers();;
+    //GeneradorMarkers generador = new GeneradorMarkers();;
     List<MarcadorBase> marcadoresBase = null;
 	
     @Override
@@ -115,7 +116,11 @@ public class Mapa extends Fragment {
 	
 	public void obtenerMarcadores(){
 		
-		marcadoresBase = generador.getMarcadores();
+		//marcadoresBase = generador.getMarcadores();
+		
+		DataApplication appState = ((DataApplication)getActivity().getApplication()); 
+		marcadoresBase = appState.data.getMarcadores();
+		
 		for (MarcadorBase marcadorBase : marcadoresBase){
 			String nombre = marcadorBase.getNombre();
 			double lat = marcadorBase.getLat();
